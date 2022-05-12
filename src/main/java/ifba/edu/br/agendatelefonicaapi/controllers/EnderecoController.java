@@ -60,8 +60,7 @@ public class EnderecoController {
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<Endereco> deletar(@PathVariable long id) {
-		List<Contato> contatos = contatoRepository.findAll().stream().filter(contato -> contato.getEndereco().getId() == id).collect(Collectors.toList());
-		contatos.get(0).setEndereco(null);
+		contatoRepository.findAll().stream().filter(contato -> contato.getEndereco().getId() == id).collect(Collectors.toList()).get(0).setEndereco(null);
 		repository.deleteById(id);
 		return new ResponseEntity<Endereco>(HttpStatus.OK);
 	}
